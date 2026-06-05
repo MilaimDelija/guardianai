@@ -69,7 +69,34 @@ export default function Dashboard() {
         body: JSON.stringify(body),
       });
       const data = await res.json();
-      const scanResult = { ...data, timestamp: new Date().toISOString() };
+      
+      // Normalize response — backend may return different formats
+      const normalizeThreats = (threats: unknown[]) => threats?.map((t: unknown) => {
+        const threat = t as Record<string, unknown>;
+        return {
+          type: (threat.type || threat.threat_type || "unknown") as string,
+          confidence: (threat.confidence || 0) as number,
+          description: (threat.description || "") as string,
+        };
+      }) || [];
+
+      const normalizeLevel = (level: unknown): string => {
+        if (!level) return "safe";
+        const l = String(level).toLowerCase();
+        if (l.includes("critical")) return "critical";
+        if (l.includes("high")) return "high";
+        if (l.includes("medium")) return "medium";
+        if (l.includes("low")) return "low";
+        return l === "safe" ? "safe" : "medium";
+      };
+
+      const scanResult = {
+        is_safe: data.is_safe ?? true,
+        threat_level: normalizeLevel(data.threat_level),
+        threats: normalizeThreats(data.threats || []),
+        scan_duration_ms: data.scan_duration_ms || 0,
+        timestamp: new Date().toISOString(),
+      };
       setResult(scanResult);
       setHistory(prev => [{ ...scanResult, input: text.substring(0, 80), scan_type: scanType }, ...prev.slice(0, 19)]);
     } catch {
