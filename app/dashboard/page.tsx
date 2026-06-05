@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { UserButton } from "@clerk/nextjs";
+import { Key } from "lucide-react";
 import Link from "next/link";
 import { Shield, AlertTriangle, CheckCircle, XCircle, Activity, Terminal, Copy, RefreshCw, Zap, Eye, Lock, FileWarning, Cpu, Globe, ArrowRight } from "lucide-react";
 
@@ -145,6 +146,9 @@ export default function Dashboard() {
               }`}></span>
               API {apiStatus === "checking" ? "checking..." : apiStatus}
             </div>
+            <Link href="/keys" className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 transition-colors">
+              <Key className="w-4 h-4" /> API Keys
+            </Link>
             <UserButton />
           </div>
           </div>
