@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { Shield, AlertTriangle, CheckCircle, XCircle, Activity, Terminal, Copy, RefreshCw, Zap, Eye, Lock, FileWarning, Cpu, Globe, ArrowRight } from "lucide-react";
 
@@ -132,6 +133,7 @@ export default function Dashboard() {
             <span className="text-gray-500 text-sm">Dashboard</span>
           </div>
           <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3">
             <div className={`flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full ${
               apiStatus === "online" ? "bg-green-50 text-green-700" :
               apiStatus === "offline" ? "bg-red-50 text-red-700" :
@@ -143,6 +145,8 @@ export default function Dashboard() {
               }`}></span>
               API {apiStatus === "checking" ? "checking..." : apiStatus}
             </div>
+            <UserButton />
+          </div>
           </div>
         </div>
       </nav>
