@@ -275,7 +275,7 @@ export default function Home() {
           </div>
           <div className="mt-6 bg-gray-50 border border-gray-200 rounded-xl p-5 font-mono text-sm">
             <div className="text-gray-400 text-xs mb-2">Base URL</div>
-            <div className="text-gray-800">https://vigil-dxwx.onrender.com</div>
+            <div className="text-gray-800">https://guardianai-api.onrender.com</div>
             <div className="text-gray-400 text-xs mt-3 mb-2">Authentication</div>
             <div className="text-gray-800">Authorization: Bearer <span className="text-red-600">your_api_key</span></div>
           </div>
@@ -377,7 +377,7 @@ export default function Home() {
             <span>· by Neuronium Engineers · Frankfurt am Main</span>
           </div>
           <div className="flex items-center gap-6">
-            <a href="https://github.com/MilaimDelija/vigil" target="_blank" className="hover:text-gray-600">GitHub</a>
+            <a href="https://github.com/MilaimDelija/guardianai" target="_blank" className="hover:text-gray-600">GitHub</a>
             <a href="mailto:contact@neuronium.engineer" className="hover:text-gray-600">Contact</a>
             <span>Apache 2.0</span>
           </div>
