@@ -275,7 +275,7 @@ export default function Home() {
           </div>
           <div className="mt-6 bg-gray-50 border border-gray-200 rounded-xl p-5 font-mono text-sm">
             <div className="text-gray-400 text-xs mb-2">Base URL</div>
-            <div className="text-gray-800">https://guardianai-api.onrender.com</div>
+            <div className="text-gray-800">https://guardianai-api-6b1d.onrender.com</div>
             <div className="text-gray-400 text-xs mt-3 mb-2">Authentication</div>
             <div className="text-gray-800">Authorization: Bearer <span className="text-red-600">your_api_key</span></div>
           </div>

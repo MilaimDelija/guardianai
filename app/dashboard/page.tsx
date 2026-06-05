@@ -41,7 +41,7 @@ export default function Dashboard() {
   const [useSemantic, setUseSemantic] = useState(true);
   const [autoRedact, setAutoRedact] = useState(true);
 
-  const API_BASE = "https://guardianai-api.onrender.com";
+  const API_BASE = "https://guardianai-api-6b1d.onrender.com";
   const DEMO_KEY = "demo_key_guardianai";
 
   useEffect(() => {
