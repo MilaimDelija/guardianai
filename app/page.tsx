@@ -19,6 +19,7 @@ export default function Home() {
             <Link href="#features" className="hover:text-gray-900">Features</Link>
             <Link href="#threats" className="hover:text-gray-900">Threats</Link>
             <Link href="#pricing" className="hover:text-gray-900">Pricing</Link>
+            <Link href="#download" className="hover:text-gray-900">Download</Link>
             <Link href="#api" className="hover:text-gray-900">API</Link>
             <Link href="/dashboard" className="bg-red-600 text-white px-4 py-1.5 rounded-lg hover:bg-red-700 transition-colors font-medium">
               Get protected
@@ -279,6 +280,77 @@ export default function Home() {
             <div className="text-gray-400 text-xs mt-3 mb-2">Authentication</div>
             <div className="text-gray-800">Authorization: Bearer <span className="text-red-600">your_api_key</span></div>
           </div>
+        </div>
+      </section>
+
+
+      {/* Download Desktop App */}
+      <section id="download" className="max-w-6xl mx-auto px-6 py-20">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 mb-3">Download GuardianAI Desktop</h2>
+          <p className="text-gray-500 max-w-xl mx-auto">System-level AI protection for your device. Monitors all AI API traffic, clipboard, and applications — automatically, in the background.</p>
+        </div>
+
+        <div className="grid grid-cols-3 gap-6 mb-8">
+          {[
+            {
+              os: "Windows",
+              icon: "🪟",
+              version: "v1.0.0",
+              file: "GuardianAI.Setup.1.0.0.exe",
+              size: "73 MB",
+              url: "https://github.com/MilaimDelija/guardianai-desktop/releases/download/v1.0.0/GuardianAI.Setup.1.0.0.exe",
+              note: "Windows 10/11 · x64",
+              available: true,
+            },
+            {
+              os: "macOS",
+              icon: "🍎",
+              version: "v1.0.0",
+              file: "GuardianAI-1.0.0.dmg",
+              size: "95 MB",
+              url: "https://github.com/MilaimDelija/guardianai-desktop/releases/download/v1.0.0/GuardianAI-1.0.0.dmg",
+              note: "macOS 12+ · Intel & Apple Silicon",
+              available: true,
+            },
+            {
+              os: "Linux",
+              icon: "🐧",
+              version: "v1.0.0",
+              file: "GuardianAI-1.0.0.AppImage",
+              size: "99 MB",
+              url: "https://github.com/MilaimDelija/guardianai-desktop/releases/download/v1.0.0/GuardianAI-1.0.0.AppImage",
+              note: "Ubuntu · Debian · Fedora · x64",
+              available: true,
+            },
+          ].map((d) => (
+            <div key={d.os} className={`bg-white border rounded-xl p-6 flex flex-col ${d.available ? "border-gray-200" : "border-gray-100 opacity-60"}`}>
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-3xl">{d.icon}</span>
+                <span className="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded-full font-medium">{d.version}</span>
+              </div>
+              <h3 className="font-bold text-gray-900 text-lg mb-1">{d.os}</h3>
+              <p className="text-xs text-gray-400 mb-4">{d.note}</p>
+              <div className="mt-auto">
+                {d.available ? (
+                  <a href={d.url}
+                    className="flex items-center justify-center gap-2 bg-red-600 text-white py-2.5 rounded-lg font-semibold text-sm hover:bg-red-700 transition-colors w-full">
+                    <ArrowRight className="w-4 h-4" /> Download · {d.size}
+                  </a>
+                ) : (
+                  <div className="text-center py-2.5 text-sm text-gray-400 border border-gray-200 rounded-lg">
+                    Coming soon
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="bg-gray-50 border border-gray-200 rounded-xl p-5 text-sm text-gray-600 text-center">
+          After installing, open GuardianAI → Settings → enter your API key from{" "}
+          <a href="/keys" className="text-red-600 font-medium hover:underline">guardianai-self.vercel.app/keys</a>
+          {" "}· Protection starts automatically
         </div>
       </section>
 
