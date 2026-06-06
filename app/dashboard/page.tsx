@@ -72,15 +72,19 @@ export default function Dashboard() {
       });
       const data = await res.json();
       
-      // Normalize response — backend may return different formats
-      const normalizeThreats = (threats: unknown[]) => threats?.map((t: unknown) => {
+      // Normalize response — backend returns threat_type not type, threat_level as enum value
+      const normalizeThreats = (threats: unknown[]) => (threats || []).map((t: unknown) => {
         const threat = t as Record<string, unknown>;
+        // Backend returns threat_type for output scan, type for input scan
+        const threatType = (threat.type || threat.threat_type || "unknown") as string;
+        // Normalize enum values like "ThreatType.PII_EXPOSURE" -> "pii_exposure"
+        const normalizedType = threatType.includes(".") ? threatType.split(".").pop()?.toLowerCase() || threatType : threatType.toLowerCase();
         return {
-          type: (threat.type || threat.threat_type || "unknown") as string,
+          type: normalizedType,
           confidence: (threat.confidence || 0) as number,
           description: (threat.description || "") as string,
         };
-      }) || [];
+      });
 
       const normalizeLevel = (level: unknown): string => {
         if (!level) return "safe";
@@ -89,13 +93,17 @@ export default function Dashboard() {
         if (l.includes("high")) return "high";
         if (l.includes("medium")) return "medium";
         if (l.includes("low")) return "low";
-        return l === "safe" ? "safe" : "medium";
+        return "safe";
       };
 
+      // Check is_safe — if threats array has items, it's not safe
+      const threats = normalizeThreats(data.threats || []);
+      const isSafe = data.is_safe === true && threats.length === 0;
+
       const scanResult = {
-        is_safe: data.is_safe ?? true,
+        is_safe: isSafe,
         threat_level: normalizeLevel(data.threat_level),
-        threats: normalizeThreats(data.threats || []),
+        threats,
         scan_duration_ms: data.scan_duration_ms || 0,
         timestamp: new Date().toISOString(),
       };
